@@ -1,0 +1,14 @@
+{% extends "base.twig" %}
+{% block container %}
+		{% if news %}
+		<h1>
+			{{ news.title }}
+			<small>{{ news.author }}, {{ news.date|date(date_format) }}</small>
+		</h1>
+		<blockquote>{{ news.content|nl2br }}</blockquote>
+		{% else %}
+		<h1>{% block lang_error %}Error{% endblock %}</h1>
+		<blockquote class="alert-danger">{% block lang_notfound %}News not found{% endblock %}</blockquote>
+		{% endif %}
+		<button type="button" class="btn btn-primary btn-lg btn-block" onclick="window.location.href='{{ root_url }}news/';">{% block lang_return %}Return to index{% endblock %}</button>
+{% endblock %}

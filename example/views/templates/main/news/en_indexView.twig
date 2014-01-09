@@ -1,0 +1,25 @@
+{% extends "base.twig" %}
+{% block container %}
+		<h1>{% block lang_welcome %}Welcome to news index{% endblock %}</h1>
+		<p class="lead">{% block lang_introexample %}Introduction example{% endblock %}</p>
+		<blockquote>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras non dictum augue. Nullam elementum, tortor sit amet sodales fermentum, mauris mauris tempus lacus, vitae mattis risus magna nec eros. Vivamus egestas ipsum ac magna consectetur facilisis. Nulla non lacus placerat, semper magna nec, varius mi. Nunc vestibulum mattis velit eu tincidunt. Donec venenatis egestas tempor. In eget felis consectetur, interdum nibh eget, rhoncus lectus. Pellentesque aliquam dui tellus, ac laoreet nisi molestie et. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+			<small>{% block lang_writtenby %}Written by{% endblock %} <cite title="Lorem Ipsum"><a href="http://lipsum.com">Lorem Ipsum</a></cite></small>
+		</blockquote>
+		{% if news|length > 0 %}
+		<div class="news">
+			<h2>{% block lang_allnews %}All news{% endblock %}<h2>
+			{% for n in news %}
+			<div id="news{{ n.id }}" class="well">
+				<a href="{{ root_url }}news/{{ n.id }}/{{ n.title|lower|replace({' ':'-'})|url_encode }}">{{ n.title }}</a> <small> {{ n.author }}, {{ n.date|date(date_format) }}</small>
+				<span class="text-right"><button type="button" class="close" aria-hidden="true" onclick="window.location.href='{{ root_url }}news/del/{{ n.id }}/';">&times;</button></span>
+			</div>
+			{% endfor %}
+		</div>
+		{% else %}
+		<blockquote class="alert-warning">
+			{% block lang_nonews %}There are currently no news.{% endblock %}
+		</blockquote>
+		{% endif %}
+		<button type="button" class="btn btn-primary btn-lg btn-block" onclick="window.location.href='{{ root_url }}news/add/';">{% block lang_addnews %}Add news{% endblock %}</button>
+{% endblock %}

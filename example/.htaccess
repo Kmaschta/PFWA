@@ -1,0 +1,3 @@
+RewriteEngine On
+
+RewriteRule !(public/.*\.(jpg|gif|png|css|js|svg|ico|ttf|eot|woff))$ index.php [QSA,L]

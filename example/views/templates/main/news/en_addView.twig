@@ -1,0 +1,36 @@
+{% extends "base.twig" %}
+{% block container %}
+		<h1>{% block lang_addnews %}Add a new{% endblock %}</h1>
+		{% if success == "true" %}
+		<blockquote class="alert-success">
+			{% block lang_saved %}Correctly saved{% endblock %}
+		</blockquote>
+		{% elseif success == "false" %}
+		<blockquote class="alert-danger">
+			{% block lang_notsaved %}The new has not be saved. Check your form fields.{% endblock %}
+		</blockquote>
+		{% endif %}
+		<form id="news_form" role="form" method="POST" action="{{ root_url }}news/add" style="margin:5px 0;">
+			<div class="form-group">
+				<label for="title">{% block lang_title %}Title{% endblock %}</label>
+				<input name="title" id="title" type="text" class="form-control" placeholder="Enter a title" />
+			</div>
+			<div class="form-group">
+				<label for="author">{% block lang_author %}Author{% endblock %}</label>
+				<select id="author" name="author" class="form-control">
+					<option value="AnAuthor">An author</option>
+					<option value="AnOtherAuthor">An other author</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="content">{% block lang_content %}Enter the content of the new here{% endblock %}</label>
+				<textarea id="content" name="content" class="form-control" rows="15"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="date">{% block lang_date %}Publication date{% endblock %}</label>
+				<input id="date" name="date" type="date" class="form-control" placeholder="YYYY-MM-DD"/>
+			</div>
+			<input type="submit" onclick="$('#news_form').submit();" class="btn btn-primary btn-lg btn-block" value="{% block lang_submit %}Save{% endblock %}" />
+		</form>
+		<button class="btn btn-default btn-lg btn-block" onclick="window.location.href='{{ root_url }}news/';">{% block lang_return %}Return to index{% endblock %}</button>
+{% endblock %}

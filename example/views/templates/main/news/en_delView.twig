@@ -1,0 +1,12 @@
+{% extends "base.twig" %}
+{% block container %}
+		<h1>{% block lang_title %}News supression{% endblock %}</h1>
+		{% if success == "null" %}
+		<button type="button" class="btn btn-danger btn-lg btn-block" onclick="window.location.href='{{ root_url }}news/del/{{ id }}/confirm/';">{% block lang_confirm %}Would you really delete this new ?{% endblock %}</button>
+		{% elseif success == "true" %}
+		<blockquote class="alert-success">{% block lang_success %}News has been deleted{% endblock %}</blockquote>
+		{% else %}
+		<blockquote class="alert-danger">{% block lang_notfound %}News not found{% endblock %}</blockquote>
+		{% endif %}
+		<button type="button" class="btn btn-primary btn-lg btn-block" onclick="window.location.href='{{ root_url }}news/';">{% block lang_return %}Return to index{% endblock %}</button>
+{% endblock %}
